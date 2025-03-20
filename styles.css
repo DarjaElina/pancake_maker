@@ -328,6 +328,10 @@ a:hover {
     max-width: 80%;
   }
 
+  #orderSummaryContent {
+    width: 50%;
+  }
+
   #pancakeForm {
     width: 80%;
   }
@@ -342,6 +346,10 @@ a:hover {
 @media (max-width: 768px) {
   body {
     padding: 1rem;
+  }
+
+  #orderSummaryContent {
+    width: 80%;
   }
 
   h1 {
