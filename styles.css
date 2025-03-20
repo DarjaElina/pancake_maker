@@ -340,7 +340,6 @@ nav .container {
   flex-direction: column;
   padding: 2rem;
   border-radius: 10px;
-  width: 30%;
   max-width: 30%;
 }
 
@@ -406,6 +405,10 @@ nav .container {
 @media (max-width: 768px) {
   body {
     padding: 1rem;
+  }
+
+  #orderSummaryContent {
+    max-width: 100%;
   }
 
   .ordersToolbar {
