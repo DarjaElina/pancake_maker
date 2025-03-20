@@ -7,12 +7,13 @@ const nameInput = document.querySelector('#customerName');
 const errorMessage = document.querySelector('#errorText');
 const userMessage = document.querySelector('#userMessage');
 const confirmOrderBtn = document.querySelector('#confirmOrder');
+const overlay = document.querySelector('.overlay');
 
 const closeModal = () => {
-    document.querySelector('.modal').classList.add('hidden');
+    overlay.classList.remove('active');
 }
 const openModal = () => {
-    document.querySelector('.modal').classList.remove('hidden');
+    overlay.classList.add('active');
 }
 
 const displayInputError = () => {
@@ -42,6 +43,7 @@ const changeHandler = () => {
 }
 
 const orderSummary = document.createElement('div');
+orderSummary.setAttribute('id', 'orderSummary');
 
 const showOrderDetails = () => {
     orderSummary.textContent = '';
@@ -115,10 +117,17 @@ const confirmOrder = () => {
 
     resetFormAndPrice();
     setTimeout(() => {
-        document.querySelector('#userMessage').classList.add('hidden');
+        userMessage.classList.add('hidden');
+        userMessage.textContent = '';
         closeModal();
-    }, 4000)
+    }, 3000)
 }
+
+document.addEventListener('click', (event) => {
+    if (!document.querySelector('#orderSummaryContent').contains(event.target) && !document.querySelector('#seeOrder').contains(event.target)) {
+        overlay.classList.remove('active');
+    }
+});
 
 document.querySelector('#seeOrder').addEventListener('click', showOrderDetails);
 document.querySelector('#pancakeForm').addEventListener('change', changeHandler);
