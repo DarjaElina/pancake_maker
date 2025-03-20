@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pancake Maker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+      <nav>
+        <div class="container">
+          <div class="navigation">
+            <a href="orders.html" target="_blank">View Orders</a>
+          </div>
+        </div>
+      </nav>
+    <div class="container">
+      <div class="image-container">
+        <img src="images/pancakes.jpg" alt="Delicious pancakes" />
+        <div class="price-banner"><span id="totalPrice">5€</span></div>
+      </div>
+        
+        
+        <form id="pancakeForm">
+          <h2>Customize Your Pancake</h2>
+          <p id="errorText" class="hidden"></p>
+          <!-- Customer Name -->
+         <div class="formItem">
+          <label for="customerName">Your Name:</label>
+          <input type="text" id="customerName" placeholder="Enter your name" />
+         </div>
+
+          <!-- Pancake Type -->
+          <div class="formItem">
+            <label for="type">Choose your pancake type:</label>
+            <select id="type">
+              <option data-price="5" value="Classic">Classic - 5€</option>
+              <option data-price="6" value="Chocolate">Chocolate - 6€</option>
+              <option data-price="7" value="Blueberry">Blueberry - 7€</option>
+            </select>
+          </div>
+
+          <!-- Toppings -->
+          <div class="formItem">
+            <h3>Select your toppings (1€ each):</h3>
+            <div class="inputWrapper">
+              <input type="checkbox" class="topping" data-price="1" value="Nuts" /> 
+              <label>
+                Nuts
+              </label>
+            </div>
+            <div class="inputWrapper">
+              <input type="checkbox" class="topping" data-price="1" value="Bananas"/>
+              <label>
+                Bananas
+              </label>
+            </div>
+            <div class="inputWrapper">
+              <input type="checkbox" class="topping" data-price="1" value="Syrup"/>
+              <label>
+                Syrup
+              </label>
+            </div>
+            
+          </div>
+
+          <!-- Extras -->
+          <div class="formItem">
+            <h3>Add extras:</h3>
+            <div class="inputWrapper">
+              <input type="checkbox" class="extra" data-price="2" value="Whipped cream"/> 
+              <label>
+                Whipped
+                Cream - 2€
+              </label>
+            </div>
+            <div class="inputWrapper">
+              <input type="checkbox" class="extra" data-price="3" value="Ice cream" /> 
+              <label>
+                Ice Cream -
+                3€
+              </label>
+            </div>
+          </div>
+
+          <!-- Delivery Method -->
+          <div class="formItem">
+              <h3>Choose delivery method:</h3>
+              <div class="inputWrapper">
+                <input
+                type="radio"
+                name="delivery"
+                class="delivery"
+                data-price="0"
+                checked
+                value="Eat in"
+              />
+            <label>
+              Eat In
+            </label>
+              </div>
+            <div class="inputWrapper">
+              <input
+                type="radio"
+                name="delivery"
+                class="delivery"
+                data-price="0"
+                value="Pick up"
+              />
+            <label>
+              Pick Up
+            </label>
+            </div>
+            <div class="inputWrapper">
+              <input
+                type="radio"
+                name="delivery"
+                class="delivery"
+                data-price="5"
+                value="Delivery"
+              />
+            <label>
+              Delivery (+5€)
+            </label>
+            </div>
+          </div>
+
+          <!-- Total Price Display -->
+          <h3>Total Price: <span id="totalPriceDisplay">5€</span></h3>
+
+          <!-- See Order Button -->
+          <button type="button" id="seeOrder">Order details</button>
+        </form>
+
+        <!-- Order Summary Display -->
+        <div class="modal hidden">
+          <div id="orderSummaryContent">
+            <img id="closeModal" src="icons/close.png" alt="">
+                <h3 id="orderSummary">Order Summary</h3>
+                <p id="userMessage" class="hidden"></p>
+                <!-- <p id="summaryText">Your order details will appear here.</p> -->
+                <!-- Confirm Order Button -->
+                <button id="confirmOrder">Confirm order</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
