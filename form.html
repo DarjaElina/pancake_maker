@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pancake Maker</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="/icons/favicon.ico">
+  </head>
+  <body>
+      <nav>
+        <div class="container">
+          <div class="navigation">
+            <a href="orders.html" target="_blank">View Orders</a>
+          </div>
+        </div>
+      </nav>
+      <div class="overlay"></div>
+    <div class="flex-container">
+      <!-- <div class="image-container">
+        <img src="images/pancakes.jpg" alt="Delicious pancakes" />
+        
+      </div> -->
+      
+        <div class="steps">
+          <div class="step">
+            <div class="index active">1</div>
+            <div>
+              <p>Step 1</p>
+              <h3>Your info</h3>
+            </div>
+          </div>
+          <div class="step">
+            <div class="index">2</div>
+            <div>
+              <p>Step 2</p>
+              <h3>Pancake type</h3>
+            </div>
+          </div>
+          <div class="step">
+            <div class="index">3</div>
+            <div>
+              <p>Step 3</p>
+              <h3>Toppings</h3>
+            </div>
+          </div>
+          <div class="step">
+            <div class="index">4</div>
+            <div>
+              <p>Step 4</p>
+              <h3>Extras</h3>
+            </div>
+          </div>
+          <div class="step">
+            <div class="index">5</div>
+            <div>
+              <p>Step 5</p>
+              <h3>Delivery method</h3>
+            </div>
+          </div>
+          <div class="step">
+            <div class="index">6</div>
+            <div>
+              <p>Step 6</p>
+              <h3>Summary</h3>
+            </div>
+          </div>
+        </div>
+      <!-- <div class="price-banner"><span id="totalPrice">5€</span></div> -->
+      <form id="pancakeForm">
+          <!-- <h2>Customize Your Pancake</h2>
+          <p id="errorText" class="hidden"></p> -->
+        <section class="group-one" id="one">
+          <div class="form-item">
+            <label for="customerName">Your Name</label>
+            <input type="text" id="customerName" placeholder="Enter your name" />
+            <span id="id-error" class="error-message" role="alert"></span>
+           </div>
+        </section>
+
+          <section class="group-two" id="two">
+            <div class="form-item">
+              <label for="type">Choose your pancake type</label>
+             <div class="radio-items">
+                <div class="radio-item">
+                  <input data-price="5" type="radio" id="classic" name="pancake-type" class="pancake-type" value="Classic" checked>
+                  <label for="classic">
+                    <img src="icons/pancake.png" alt="">
+                    <div>
+                        <h4>Classic</h4>
+                        <p>5€</p>
+                    </div>
+                  </label>
+                </div>
+                <div class="radio-item">
+                  <input data-price="6" type="radio" name="pancake-type" id="chocolate" class="pancake-type" value="Chocolate">
+                  <label for="chocolate">
+                    <img src="icons/chocolate.png" alt="">
+                    <div>
+                        <h4>Chocolate</h4>
+                        <p>6€</p>
+                    </div>
+                  </label>
+                </div>
+                <div class="radio-item">
+                  <input data-price="7" type="radio" name="pancake-type" id="blueberry" class="pancake-type" value="Blueberry">
+                  <label for="blueberry">
+                    <img src="icons/blueberry.png" alt="">
+                    <div>
+                        <h4>Blueberry</h4>
+                        <p>7€</p>
+                    </div>
+                  </label>
+                </div>
+             </div>
+            </div>
+          </section>
+
+         <section class="group-three" id="three">
+          <div class="form-item">
+            <h3>Select your toppings</h3>
+            <div class="inputWrapper">
+              
+              <label for="nuts">
+                <input type="checkbox" id="nuts" class="topping" data-price="1" value="Nuts" />
+                Nuts
+              </label>
+              <p>1€</p>
+            </div>
+            <div class="inputWrapper">
+              <label for="bananas">
+                <input type="checkbox" id="bananas" class="topping" data-price="1" value="Bananas"/>
+                Bananas
+              </label>
+              <p>1€</p>
+            </div>
+            <div class="inputWrapper">
+              <label for="syrup">
+                <input type="checkbox" id="syrup" class="topping" data-price="1" value="Syrup"/>
+                Syrup
+              </label>
+              <p>1€</p>
+            </div>
+          </div>
+         </section>
+
+          <section class="group-four" id="four">
+            <div class="form-item">
+              <h3>Add extras</h3>
+              <div class="inputWrapper">
+                <label for="whipped-cream">
+                  <input type="checkbox" id="whipped-cream" class="extra" data-price="2" value="Whipped cream"/> 
+                  Whipped Cream
+                </label>
+                <p>2€</p>
+              </div>
+              <div class="inputWrapper">
+                
+                <label for="ice-cream">
+                  <input type="checkbox" id="ice-cream" class="extra" data-price="3" value="Ice cream" /> 
+                  Ice Cream
+                </label>
+                <p>3€</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="group-five" id="five">
+            
+              <div class="form-item">
+                <h3>Choose delivery method</h3>
+                <div class="radio-items">
+                  <div class="radio-item">
+                    <input
+                    type="radio"
+                    name="delivery"
+                    class="delivery"
+                    data-price="0"
+                    checked
+                    value="Eat in"
+                    id="eat-in"
+                    checked
+                  >
+                <label for="eat-in">
+                  <img src="icons/eat.png" alt="eat in">
+                  <div>
+                    <h4>Eat In</h4>
+                    <p>0€</p>
+                  </div>
+                </label>
+                  </div>
+                <div class="radio-item">
+                  <input
+                    id="pick-up"
+                    type="radio"
+                    name="pick-up"
+                    class="pick-up"
+                    data-price="0"
+                    value="Pick up"
+                  >
+                <label for="pick-up">
+                  <img src="icons/pick-up.png" alt="pick up">
+                  <div>
+                    <h4>Pick Up</h4>
+                    <p>0€</p>
+                  </div>
+                </label>
+                </div>
+                <div class="radio-item">
+                  <input id="delivery" type="radio" name="delivery" class="delivery" data-price="5" value="Delivery">
+                    <label for="delivery">
+                      <img src="icons/delivery.png" alt="delivery">
+                      <div>
+                        <h4>Delivery</h4>
+                        <p>5€</p>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+            </div>
+          </section>
+
+          <section class="group-six" id="six">
+            <div id="orderSummary">
+              <h2>Order summary</h2>
+              <p>Double check that everything looks good!</p>
+                  <div>
+                    <h4>Name:</p>
+                    <p id="customer-name-val"></p>
+                  </div>
+                  <div>
+                    <h4>Pancake type:</p>
+                    <p id="pancake-type-val"></p>
+                  </div>
+                  <div>
+                    <h4>Toppings: </p>
+                    <p id="toppings-val"></p>
+                  </div>
+                  <div>
+                    <h4>Extras: </p>
+                    <p id="extras-val"></p>
+                  </div>
+                  <div>
+                    <h4>Delivery: </p>
+                    <p id="delivery-val"></p>
+                  </div>
+              <button id="confirm-order" type="submit">Confirm order</button>
+            </div>
+          </section>
+
+          
+
+          <div class="arrows">
+            <button type="button" id="navLeft">Go back</button>
+            <button type="button" id="navRight">Next step</button>
+          </div>
+          <h3 class="total-price hidden">Total Price: <span id="totalPriceDisplay">5€</span></h3>
+        </form>
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

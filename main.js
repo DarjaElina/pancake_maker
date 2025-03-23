@@ -1,29 +1,95 @@
-import { createParagraphs, Order } from './utils.js';
+import { Order } from './utils.js';
 
-const pancakeTypeInput = document.querySelector('#type');
 const totalPriceDisplay = document.querySelector('#totalPriceDisplay');
-const totalPriceBanner = document.querySelector('#totalPrice');
+const totalPrice = document.querySelector('.total-price');
 const nameInput = document.querySelector('#customerName');
-const errorMessage = document.querySelector('#errorText');
-const userMessage = document.querySelector('#userMessage');
-const confirmOrderBtn = document.querySelector('#confirmOrder');
-const overlay = document.querySelector('.overlay');
+const confirmOrderBtn = document.querySelector('#confirm-order');
 
-const closeModal = () => {
-    overlay.classList.remove('active');
-}
-const openModal = () => {
-    overlay.classList.add('active');
+const nameVal = document.querySelector('#customer-name-val');
+const typeVal = document.querySelector('#pancake-type-val');
+const toppingsVal = document.querySelector('#toppings-val');
+const extrasVal = document.querySelector('#extras-val');
+const deliveryVal = document.querySelector('#delivery-val');
+
+const updateSummaryValues = () => {
+    const toppings = [...document.querySelectorAll('.topping:checked')].map(t => t.value);
+    const extras = [...document.querySelectorAll('.extra:checked')].map(t => t.value);
+    nameVal.textContent = nameInput.value;
+
+    typeVal.textContent = document.querySelector('.pancake-type:checked').value;
+    toppingsVal.textContent = toppings.length > 0 ? toppings.join(', ') : 'Not selected';
+    extrasVal.textContent = extras.length > 0 ? extras.join(', ') : 'Not selected';
+    deliveryVal.textContent = document.querySelector('.delivery:checked').value;
 }
 
-const displayInputError = () => {
-    errorText.classList.remove('hidden');
-    errorText.textContent = 'Please enter your name.';
+const stepIndexes = document.querySelectorAll('.index');
+
+stepIndexes.forEach((s, i) => {
+    s.addEventListener('click', () => {
+        updateStepVisibility(i);
+    })
+})
+
+
+const navLeft = document.getElementById("navLeft");
+const navRight = document.getElementById("navRight");
+const form = document.getElementById("pancakeForm");
+const formSteps = ["one", "two", "three", "four", "five", "six"];
+
+let currentStep = 0;
+
+const updateStepVisibility = (i) => {
+    // totalPriceDisplay.classList.remove('hidden');
+    currentStep = i || i === 0 ? i : currentStep;
+    formSteps.forEach((step) => {
+        document.getElementById(step).style.display = "none";
+    });
+
+    stepIndexes.forEach(s => s.classList.remove('active'));
+
+    stepIndexes[currentStep].classList.add('active');
+
+    if (currentStep === 5 || i === 5) {
+        updateSummaryValues();
+    }
+
+    currentStep > 0 || i > 0 ? totalPrice.classList.remove('hidden') : totalPrice.classList.add('hidden')
+
+
+  document.getElementById(formSteps[currentStep]).style.display = "block";
+  navLeft.style.display = currentStep === 0 ? "none" : "block";
+  navRight.style.display =
+  currentStep === formSteps.length - 1 ? "none" : "block";
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  navLeft.style.display = "none";
+  updateStepVisibility();
+  navRight.addEventListener("click", () => {
+    if (currentStep < formSteps.length - 1) {
+      if (nameInput.value.trim()) {
+        currentStep++;
+        updateStepVisibility();
+      } else document.querySelector('.error-message').textContent = 'Please enter your name';
+    }
+  });
+
+  navLeft.addEventListener("click", () => {
+    if (currentStep > 0) {
+      currentStep--;
+      updateStepVisibility();
+    }
+  });
+});
+
+// const displayInputError = () => {
+//     errorText.classList.remove('hidden');
+//     errorText.textContent = 'Please enter your name.';
+// }
 
 const changeHandler = () => {
     const basePrice = parseFloat(
-        pancakeTypeInput.selectedOptions[0].dataset.price
+        document.querySelector('.pancake-type:checked').dataset.price
     )
 
     const toppingsTotal = [...document.querySelectorAll('.topping:checked')]
@@ -39,66 +105,65 @@ const changeHandler = () => {
     let totalPrice = basePrice + toppingsTotal + extrasTotal + deliveryOption;
 
     totalPriceDisplay.textContent = `${totalPrice} €`;
-    totalPriceBanner.textContent = `${totalPrice} €`;
+    // totalPriceBanner.textContent = `${totalPrice} €`;
 }
 
-const orderSummary = document.createElement('div');
-orderSummary.setAttribute('id', 'orderSummary');
+// const showOrderDetails = () => {
+//     orderSummary.textContent = '';
 
-const showOrderDetails = () => {
-    orderSummary.textContent = '';
+//     const order = {
+//         customerName: nameInput.value,
+//         pancakeType: pancakeTypeInput.value,
+//         toppings: [...document.querySelectorAll('.topping:checked')].map(t => t.value),
+//         extras: [...document.querySelectorAll('.extra:checked')].map(t => t.value),
+//         deliveryMethod: document.querySelector('.delivery:checked').value,
+//         totalPrice: parseFloat(totalPriceDisplay.textContent)
+//     }
 
-    const order = {
-        customerName: nameInput.value,
-        pancakeType: pancakeTypeInput.value,
-        toppings: [...document.querySelectorAll('.topping:checked')].map(t => t.value),
-        extras: [...document.querySelectorAll('.extra:checked')].map(t => t.value),
-        deliveryMethod: document.querySelector('.delivery:checked').value,
-        totalPrice: parseFloat(totalPriceDisplay.textContent)
-    }
+//     if (!nameInput.value.trim()) {
+//         displayInputError();
+//         return;
+//     }
 
-    if (!nameInput.value.trim()) {
-        displayInputError();
-        return;
-    }
-
-    createParagraphs(['customerName', 'pancakeType', 'toppings', 'extras', 'deliveryMethod', 'totalPrice'], order, orderSummary);
+//     createParagraphs(['customerName', 'pancakeType', 'toppings', 'extras', 'deliveryMethod', 'totalPrice'], order, orderSummary);
     
-    confirmOrderBtn.classList.remove('hidden');
-    document.querySelector('#orderSummaryContent').insertBefore(orderSummary, confirmOrderBtn);
+//     confirmOrderBtn.classList.remove('hidden');
+//     document.querySelector('#orderSummaryContent').insertBefore(orderSummary, confirmOrderBtn);
 
-    errorMessage.classList.add('hidden');
-    openModal();
-}
+//     errorMessage.classList.add('hidden');
+//     openModal();
+// }
 
-const resetCheckboxes = (checkboxes) => {
-    for (const checkbox of checkboxes) {
-        checkbox.checked = false;
-    }
-}
+// const resetCheckboxes = (checkboxes) => {
+//     for (const checkbox of checkboxes) {
+//         checkbox.checked = false;
+//     }
+// }
 
-const resetFormAndPrice = () => {
-    resetCheckboxes(document.querySelectorAll('.topping'));
-    resetCheckboxes(document.querySelectorAll('.extra'));
-    pancakeTypeInput.value = 'Classic';
-    document.querySelector('.delivery').checked = 'Eat in';
-    totalPriceDisplay.textContent = '5 €';
-    totalPriceBanner.textContent = '5 €';
-};
+// const resetFormAndPrice = () => {
+//     resetCheckboxes(document.querySelectorAll('.topping'));
+//     resetCheckboxes(document.querySelectorAll('.extra'));
+//     pancakeTypeInput.value = 'Classic';
+//     document.querySelector('.delivery').checked = 'Eat in';
+//     totalPriceDisplay.textContent = '5 €';
+//     totalPriceBanner.textContent = '5 €';
+// };
 
-const confirmOrder = () => {
+const confirmOrder = (e) => {
+    e.preventDefault();
+    orderSummary.textContent = '';
     const id = Date.now().toString();
     const customerName = nameInput.value;
-    const pancakeType = pancakeTypeInput.value;
+    const pancakeType = document.querySelector('.pancake-type:checked').value;
     const toppings = [...document.querySelectorAll('.topping:checked')].map(t => t.value);
     const extras = [...document.querySelectorAll('.extra:checked')].map(t => t.value);
     const deliveryMethod = document.querySelector('.delivery:checked').value;
     const totalPrice = parseFloat(totalPriceDisplay.textContent);
 
-    if (!customerName) {
-        displayInputError();
-        return;
-    }
+    // if (!customerName) {
+    //     displayInputError();
+    //     return;
+    // }
 
     const newOrder = new Order(id, customerName, pancakeType, toppings, extras, deliveryMethod, totalPrice);
 
@@ -108,28 +173,12 @@ const confirmOrder = () => {
 
     localStorage.setItem('orders', JSON.stringify(orders));
 
-    orderSummary.textContent = '';
-    errorMessage.classList.add('hidden');
-    confirmOrderBtn.classList.add('hidden');
-    userMessage.classList.remove('hidden');
-    userMessage.textContent = 'Your order has been successfully completed! 🎉 This window will close in a few seconds.';
-    nameInput.value = '';
-
-    resetFormAndPrice();
-    setTimeout(() => {
-        userMessage.classList.add('hidden');
-        userMessage.textContent = '';
-        closeModal();
-    }, 3000)
+   document.querySelector('#six').textContent = "Thank you for your order! Your pancakes are on their way!🥞❤️"
 }
 
-document.addEventListener('click', (event) => {
-    if (!document.querySelector('#orderSummaryContent').contains(event.target) && !document.querySelector('#seeOrder').contains(event.target)) {
-        overlay.classList.remove('active');
-    }
-});
-
-document.querySelector('#seeOrder').addEventListener('click', showOrderDetails);
-document.querySelector('#pancakeForm').addEventListener('change', changeHandler);
-document.querySelector('#closeModal').addEventListener('click', closeModal);
+// document.querySelector('#seeOrder').addEventListener('click', showOrderDetails);
+form.addEventListener('change', changeHandler);
+// document.querySelector('#closeModal').addEventListener('click', closeModal);
 confirmOrderBtn.addEventListener('click', confirmOrder);
+
+
