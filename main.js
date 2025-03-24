@@ -3,13 +3,14 @@ import { Order } from './utils.js';
 const totalPriceDisplay = document.querySelector('#totalPriceDisplay');
 const totalPrice = document.querySelector('.total-price');
 const nameInput = document.querySelector('#customerName');
-const confirmOrderBtn = document.querySelector('#confirm-order');
+const confirmOrderBtn = document.querySelector('.confirm-order');
 
-const nameVal = document.querySelector('#customer-name-val');
-const typeVal = document.querySelector('#pancake-type-val');
-const toppingsVal = document.querySelector('#toppings-val');
-const extrasVal = document.querySelector('#extras-val');
-const deliveryVal = document.querySelector('#delivery-val');
+const nameVal = document.querySelector('#customerNameVal');
+const typeVal = document.querySelector('#pancakeTypeVal');
+const toppingsVal = document.querySelector('#toppingsVal');
+const extrasVal = document.querySelector('#extrasVal');
+const deliveryVal = document.querySelector('#deliveryVal');
+const totalVal = document.querySelector('#totalVal');
 
 const updateSummaryValues = () => {
     const toppings = [...document.querySelectorAll('.topping:checked')].map(t => t.value);
@@ -20,13 +21,17 @@ const updateSummaryValues = () => {
     toppingsVal.textContent = toppings.length > 0 ? toppings.join(', ') : 'Not selected';
     extrasVal.textContent = extras.length > 0 ? extras.join(', ') : 'Not selected';
     deliveryVal.textContent = document.querySelector('.delivery:checked').value;
+    totalVal.textContent = `${parseFloat(totalPriceDisplay.textContent)}€`;
 }
 
 const stepIndexes = document.querySelectorAll('.index');
 
 stepIndexes.forEach((s, i) => {
     s.addEventListener('click', () => {
+      if (nameInput.value.trim()) {
+        currentStep++;
         updateStepVisibility(i);
+      } else showError(nameInput, 'Please, enter your name.');
     })
 })
 
@@ -39,8 +44,8 @@ const formSteps = ["one", "two", "three", "four", "five", "six"];
 let currentStep = 0;
 
 const updateStepVisibility = (i) => {
-    // totalPriceDisplay.classList.remove('hidden');
     currentStep = i || i === 0 ? i : currentStep;
+    document.querySelector('.confirm-order').classList.add('hidden');
     formSteps.forEach((step) => {
         document.getElementById(step).style.display = "none";
     });
@@ -51,6 +56,7 @@ const updateStepVisibility = (i) => {
 
     if (currentStep === 5 || i === 5) {
         updateSummaryValues();
+        document.querySelector('.confirm-order').classList.remove('hidden');
     }
 
     currentStep > 0 || i > 0 ? totalPrice.classList.remove('hidden') : totalPrice.classList.add('hidden')
@@ -62,15 +68,37 @@ const updateStepVisibility = (i) => {
   currentStep === formSteps.length - 1 ? "none" : "block";
 }
 
+const showError = (input, message) => {
+  const formControl = input.parentElement;
+  const errorSpan = formControl.querySelector(".error-message");
+  input.classList.add("error");
+  errorSpan.textContent = message;
+}
+
+const clearError = (input) => {
+  const formControl = input.parentElement;
+  const errorSpan = formControl.querySelector(".error-message");
+  input.classList.remove("error");
+  errorSpan.textContent = "";
+}
+
+const realtimeValidation = () => {
+    nameInput.addEventListener("input", () => {
+      if (nameInput.value.trim() !== "") clearError(nameInput);
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   navLeft.style.display = "none";
   updateStepVisibility();
+  realtimeValidation();
+
   navRight.addEventListener("click", () => {
     if (currentStep < formSteps.length - 1) {
       if (nameInput.value.trim()) {
         currentStep++;
         updateStepVisibility();
-      } else document.querySelector('.error-message').textContent = 'Please enter your name';
+      } else showError(nameInput, 'Please, enter your name');
     }
   });
 
@@ -81,11 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-// const displayInputError = () => {
-//     errorText.classList.remove('hidden');
-//     errorText.textContent = 'Please enter your name.';
-// }
 
 const changeHandler = () => {
     const basePrice = parseFloat(
@@ -105,49 +128,7 @@ const changeHandler = () => {
     let totalPrice = basePrice + toppingsTotal + extrasTotal + deliveryOption;
 
     totalPriceDisplay.textContent = `${totalPrice} €`;
-    // totalPriceBanner.textContent = `${totalPrice} €`;
 }
-
-// const showOrderDetails = () => {
-//     orderSummary.textContent = '';
-
-//     const order = {
-//         customerName: nameInput.value,
-//         pancakeType: pancakeTypeInput.value,
-//         toppings: [...document.querySelectorAll('.topping:checked')].map(t => t.value),
-//         extras: [...document.querySelectorAll('.extra:checked')].map(t => t.value),
-//         deliveryMethod: document.querySelector('.delivery:checked').value,
-//         totalPrice: parseFloat(totalPriceDisplay.textContent)
-//     }
-
-//     if (!nameInput.value.trim()) {
-//         displayInputError();
-//         return;
-//     }
-
-//     createParagraphs(['customerName', 'pancakeType', 'toppings', 'extras', 'deliveryMethod', 'totalPrice'], order, orderSummary);
-    
-//     confirmOrderBtn.classList.remove('hidden');
-//     document.querySelector('#orderSummaryContent').insertBefore(orderSummary, confirmOrderBtn);
-
-//     errorMessage.classList.add('hidden');
-//     openModal();
-// }
-
-// const resetCheckboxes = (checkboxes) => {
-//     for (const checkbox of checkboxes) {
-//         checkbox.checked = false;
-//     }
-// }
-
-// const resetFormAndPrice = () => {
-//     resetCheckboxes(document.querySelectorAll('.topping'));
-//     resetCheckboxes(document.querySelectorAll('.extra'));
-//     pancakeTypeInput.value = 'Classic';
-//     document.querySelector('.delivery').checked = 'Eat in';
-//     totalPriceDisplay.textContent = '5 €';
-//     totalPriceBanner.textContent = '5 €';
-// };
 
 const confirmOrder = (e) => {
     e.preventDefault();
@@ -160,11 +141,6 @@ const confirmOrder = (e) => {
     const deliveryMethod = document.querySelector('.delivery:checked').value;
     const totalPrice = parseFloat(totalPriceDisplay.textContent);
 
-    // if (!customerName) {
-    //     displayInputError();
-    //     return;
-    // }
-
     const newOrder = new Order(id, customerName, pancakeType, toppings, extras, deliveryMethod, totalPrice);
 
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -173,12 +149,19 @@ const confirmOrder = (e) => {
 
     localStorage.setItem('orders', JSON.stringify(orders));
 
-   document.querySelector('#six').textContent = "Thank you for your order! Your pancakes are on their way!🥞❤️"
+   document.querySelector('#pancakeForm').textContent = "Thank you for your order! Your pancakes are on their way! 🥞❤️";
+   const reorderBtn = document.createElement('button');
+   reorderBtn.setAttribute('id', 'reorderBtn')
+   reorderBtn.textContent = 'Order again';
+   document.querySelector('#pancakeForm').appendChild(reorderBtn);
+   reorderBtn.addEventListener('click', () => {
+    location.reload();
+  })
 }
 
-// document.querySelector('#seeOrder').addEventListener('click', showOrderDetails);
 form.addEventListener('change', changeHandler);
-// document.querySelector('#closeModal').addEventListener('click', closeModal);
 confirmOrderBtn.addEventListener('click', confirmOrder);
+
+
 
 

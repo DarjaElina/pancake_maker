@@ -1,31 +1,44 @@
 export const createParagraphs = (keysArray, order, parentDiv) => {
     keysArray.forEach(k => {
-        const paragraph = document.createElement('p');
-        paragraph.classList.add('decoratedParagraph')
-        parentDiv.appendChild(paragraph);
+        const summaryItem = document.createElement('div');
+        summaryItem.classList.add('summary-item');
+
+        const title = document.createElement('h4');
+        const value = document.createElement('p');
+
         switch (k) {
             case 'customerName':
-                paragraph.textContent = `Customer name: ${order.customerName}`;
-                return;
+                title.textContent = 'Customer name:';
+                value.textContent = order.customerName;
+                break;
             case 'pancakeType':
-                paragraph.textContent = `Pancake type: ${order.pancakeType}`;
-                return;
+                title.textContent = 'Pancake type:';
+                value.textContent = order.pancakeType;
+                break;
             case 'toppings':
-                paragraph.textContent = `Toppings: ${order.toppings.length > 0 ? order.toppings.join(', ') : 'Not selected'}`;
-                return;
+                title.textContent = 'Toppings:';
+                value.textContent = order.toppings.length > 0 ? order.toppings.join(', ') : 'Not selected';
+                break;
             case 'extras':
-                paragraph.textContent = `Extras: ${order.extras.length > 0 ? order.extras.join(', ') : 'Not selected'}`;
-                return;
+                title.textContent = 'Extras:';
+                value.textContent = order.extras.length > 0 ? order.extras.join(', ') : 'Not selected';
+                break;
             case 'deliveryMethod':
-                paragraph.textContent = `Delivery method: ${order.deliveryMethod}`;
-                return;
+                title.textContent = 'Delivery method:';
+                value.textContent = order.deliveryMethod;
+                break;
             case 'totalPrice':
-                paragraph.textContent = `Total price: ${order.totalPrice} €`;
-                return;
+                title.textContent = 'Total price:';
+                value.textContent = `${order.totalPrice} €`;
+                break;
             default:
-                paragraph.textContent = '';
+                return; 
         }
-    })
+
+        summaryItem.appendChild(title);
+        summaryItem.appendChild(value);
+        parentDiv.appendChild(summaryItem);
+    });
 };
 
 

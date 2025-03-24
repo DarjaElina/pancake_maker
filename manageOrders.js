@@ -20,7 +20,7 @@ const createDropdown = (currentSelected) => {
 
 const createDropdownWrapper = (label, dropdown, parentDiv) => {
     const dropdownWrapper = document.createElement('div');
-    dropdownWrapper.setAttribute('class', 'statusDropdownWrapper');
+    dropdownWrapper.setAttribute('class', 'status-dropdown-wrapper');
     dropdownWrapper.append(label, dropdown);
     styleDropdownWrapper(dropdownWrapper);
 
@@ -29,9 +29,9 @@ const createDropdownWrapper = (label, dropdown, parentDiv) => {
 
 const styleDropdownWrapper = (dropdown) => {
     const colors = {
-        waiting: '#FFC107',
-        ready: '#A2D2FF',
-        delivered: '#B8E0D6'
+        waiting: '#F4A261',
+        ready: '#2A9D8F',
+        delivered: '#1D3557'
     }
     dropdown.style.backgroundColor = colors[dropdown.childNodes[1].value] || '#FFF0F3';
 }
@@ -55,6 +55,7 @@ const displayOrders = (orders, message) => {
 
     orders.forEach((order) => {
         const orderItem = document.createElement('li');
+        orderItem.setAttribute('class', 'order-item');
         const status = document.createElement('p');
         status.textContent = 'Status: ';
         const dropdown = createDropdown(order.status);
