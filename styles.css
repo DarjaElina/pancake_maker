@@ -8,6 +8,7 @@
 
 :root {
   --primary: #001d3d;
+  --test: #65a0e3;
   --secondary: #F4A261;
   --secondary-hovered: #E76F51;
   --primary-hovered: #103965;
@@ -231,7 +232,7 @@ nav .button-link {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   width: 100%;
-  color: var(--background);
+  color: var(--primary);
 }
 
 #pancakeForm {

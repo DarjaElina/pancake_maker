@@ -32,7 +32,7 @@ const styleDropdownWrapper = (dropdown) => {
     const colors = {
         waiting: '#F4A261',
         ready: '#2A9D8F',
-        delivered: '#1D3557'
+        delivered: '#65a0e3'
     }
     dropdown.style.backgroundColor = colors[dropdown.childNodes[1].value] || '#FFF0F3';
 }
