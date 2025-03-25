@@ -178,7 +178,7 @@ nav .button-link {
 .form-item {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .input-wrapper {
@@ -342,7 +342,6 @@ nav .button-link {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
 }
 
 #navLeft, #navRight {
@@ -370,7 +369,6 @@ nav .button-link {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  margin-bottom: 2rem;
 }
 
 .radio-items .radio-item input[type=radio]:checked~label {
@@ -526,7 +524,7 @@ label {
   }
 
   #pancakeForm {
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .navigation {
@@ -541,7 +539,8 @@ label {
     flex-direction: column;
   }
 
-  .step p, h3 {
+  .steps .step div p,
+  .steps .step div h3 {
     display: none;
   }
 
