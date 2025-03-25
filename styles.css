@@ -474,8 +474,8 @@ label {
   border-bottom: none;
 }
 
+
 .summary-item h4 {
-  color: var();
   font-weight: 600;
   margin: 0;
 }
@@ -571,6 +571,11 @@ label {
 
   #orderList {
     grid-template-columns: 1fr;
+  }
+
+  .summary-item {
+    display: block;
+    font-size: 1rem;
   }
 }
 
