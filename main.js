@@ -4,13 +4,17 @@ const totalPriceDisplay = document.querySelector('#totalPriceDisplay');
 const totalPrice = document.querySelector('.total-price');
 const nameInput = document.querySelector('#customerName');
 const confirmOrderBtn = document.querySelector('.confirm-order');
-
 const nameVal = document.querySelector('#customerNameVal');
 const typeVal = document.querySelector('#pancakeTypeVal');
 const toppingsVal = document.querySelector('#toppingsVal');
 const extrasVal = document.querySelector('#extrasVal');
 const deliveryVal = document.querySelector('#deliveryVal');
 const totalVal = document.querySelector('#totalVal');
+const navLeft = document.getElementById("navLeft");
+const navRight = document.getElementById("navRight");
+const form = document.getElementById("pancakeForm");
+const stepIndexes = document.querySelectorAll('.index');
+const formSteps = ["one", "two", "three", "four", "five", "six"];
 
 const updateSummaryValues = () => {
     const toppings = [...document.querySelectorAll('.topping:checked')].map(t => t.value);
@@ -24,8 +28,6 @@ const updateSummaryValues = () => {
     totalVal.textContent = `${parseFloat(totalPriceDisplay.textContent)}€`;
 }
 
-const stepIndexes = document.querySelectorAll('.index');
-
 stepIndexes.forEach((s, i) => {
     s.addEventListener('click', () => {
       if (nameInput.value.trim()) {
@@ -34,12 +36,6 @@ stepIndexes.forEach((s, i) => {
       } else showError(nameInput, 'Please, enter your name.');
     })
 })
-
-
-const navLeft = document.getElementById("navLeft");
-const navRight = document.getElementById("navRight");
-const form = document.getElementById("pancakeForm");
-const formSteps = ["one", "two", "three", "four", "five", "six"];
 
 let currentStep = 0;
 

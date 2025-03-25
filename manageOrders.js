@@ -1,5 +1,4 @@
 import { createParagraphs } from './utils.js';
-
 const orders = JSON.parse(localStorage.getItem('orders')) || [];
 const orderList = document.querySelector('#orderList');
 
