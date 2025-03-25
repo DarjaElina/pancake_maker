@@ -34,16 +34,11 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--secondary);
   font-size: 1.2rem;
 }
 
 h1, h2 {
   text-align: center;
-}
-
-a:hover {
-  color: var(--secondary-hovered);
 }
 
 p {
@@ -329,15 +324,12 @@ nav .button-link {
   margin: 1.5rem auto;
   transition: transform 0.3s ease, background-color 0.3s;
   cursor: pointer;
+  color: var(--primary);
 }
 
 .button-link:hover {
   transform: scale(1.1);
   background-color: var(--secondary-hovered);
-}
-
-.button-link a {
-  color: var(--primary);
 }
 
 /* MULTISTEP FORM */
