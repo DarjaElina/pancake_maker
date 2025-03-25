@@ -152,7 +152,7 @@ select {
 
 .overlay {
   position: fixed;
-  background: url(images/pancakes6.jpg) center center/cover no-repeat;
+  background: url(images/pancakes6.webp) center center/cover no-repeat;
   filter: brightness(0.4);
   top: 0;
   left: 0;
@@ -272,12 +272,14 @@ nav .button-link {
 .pancakes {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: max-content;
   gap: 1.5rem;
 }
 
 .pancakes img {
   cursor: pointer;
   width: 90%;
+  height: auto;
   object-fit: contain;
   border-radius: 10px;
   transition: transform 0.3s ease, filter 0.3s ease;
@@ -326,7 +328,6 @@ nav .button-link {
   margin: 1.5rem auto;
   transition: transform 0.3s ease, background-color 0.3s;
   cursor: pointer;
-  color: #fff;
 }
 
 .button-link:hover {
@@ -335,7 +336,7 @@ nav .button-link {
 }
 
 .button-link a {
-  color: var(--background)
+  color: var(--primary);
 }
 
 /* MULTISTEP FORM */
@@ -582,5 +583,18 @@ label {
 @media (max-width: 480px) {
   #pancakeForm {
     width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .overlay{
+    background: url(assets/images/pancakes6-400.webp) center/cover no-repeat
+  }
+}
+
+
+@media (max-width: 600px) {
+  .overlay{
+    background: url(assets/images/pancakes6-600.webp) center/cover no-repeat
   }
 }
