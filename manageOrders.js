@@ -6,6 +6,7 @@ const orderList = document.querySelector('#orderList');
 const createDropdown = (currentSelected) => {
     const options = ['waiting', 'ready', 'delivered'];
     const select = document.createElement('select');
+    select.setAttribute('id', 'status');
 
     for (const option of options) {
         const optionNode = document.createElement('option');
@@ -56,9 +57,9 @@ const displayOrders = (orders, message) => {
     orders.forEach((order) => {
         const orderItem = document.createElement('li');
         orderItem.setAttribute('class', 'order-item');
-        const status = document.createElement('p');
-        status.textContent = 'Status: ';
         const dropdown = createDropdown(order.status);
+        const status = document.createElement('label');
+        status.setAttribute('for', 'status');
         createDropdownWrapper(status, dropdown, orderItem);
         createParagraphs(['customerName', 'pancakeType', 'toppings', 'extras', 'deliveryMethod', 'totalPrice'], order, orderItem);
 
