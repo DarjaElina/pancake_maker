@@ -59,6 +59,7 @@ const displayOrders = (orders, message) => {
         orderItem.setAttribute('class', 'order-item');
         const dropdown = createDropdown(order.status);
         const status = document.createElement('label');
+        status.textContent = 'Status';
         status.setAttribute('for', 'status');
         createDropdownWrapper(status, dropdown, orderItem);
         createParagraphs(['customerName', 'pancakeType', 'toppings', 'extras', 'deliveryMethod', 'totalPrice'], order, orderItem);
