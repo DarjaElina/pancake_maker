@@ -589,13 +589,13 @@ label {
 
 @media (max-width: 400px) {
   .overlay{
-    background: url(assets/images/pancakes6-400.webp) center/cover no-repeat
+    background: url(images/pancakes6-400w.webp) center/cover no-repeat
   }
 }
 
 
 @media (max-width: 600px) {
   .overlay{
-    background: url(assets/images/pancakes6-600.webp) center/cover no-repeat
+    background: url(images/pancakes6-600w.webp) center/cover no-repeat
   }
 }
