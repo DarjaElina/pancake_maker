@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (nameInput.value.trim()) {
         currentStep++;
         updateStepVisibility();
-      } else showError(nameInput, 'Please, enter your name');
+      } else showError(nameInput, 'Please, enter your name.');
     }
   });
 
