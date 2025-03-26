@@ -148,7 +148,7 @@ select {
 
 .overlay {
   position: fixed;
-  background: url(images/pancakes6.webp) center center/cover no-repeat;
+  background: url(images/pancake-bg.webp) center center/cover no-repeat;
   filter: brightness(0.4);
   top: 0;
   left: 0;
@@ -582,13 +582,44 @@ label {
 
 @media (max-width: 400px) {
   .overlay{
-    background: url(images/pancakes6-400w.webp) center/cover no-repeat
+    background: url(images/pancake-bg-400w.webp) center/cover no-repeat
   }
 }
 
 
 @media (max-width: 600px) {
   .overlay{
-    background: url(images/pancakes6-600w.webp) center/cover no-repeat
+    background: url(images/pancake-bg-600w.webp) center/cover no-repeat
+  }
+}
+
+@media (max-width: 800px) {
+  .overlay{
+    background: url(images/pancake-bg-800w.webp) center/cover no-repeat
+  }
+}
+
+@media (max-width: 1000px) {
+  .overlay{
+    background: url(images/pancake-bg-1000w.webp) center/cover no-repeat
+  }
+}
+
+@media (max-width: 1200px) {
+  .overlay{
+    background: url(images/pancakes6-1200w.webp) center/cover no-repeat
+  }
+}
+
+
+@media (max-width: 1600px) {
+  .overlay{
+    background: url(images/pancake-bg-1600w.webp) center/cover no-repeat
+  }
+}
+
+@media (max-width: 2000px) {
+  .overlay{
+    background: url(images/pancake-bg-2000w.webp) center/cover no-repeat
   }
 }
